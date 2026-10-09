@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MP-MLA Platform | Official User Operating Manual & Documentation</title>
+  <meta name="description" content="Official User Operating Manual and Complete Documentation Guide for the MP-MLA Constituency Management SaaS Platform. Built directly from the platform codebase and database schema.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="icon" href="assets/images/logo.png">
+</head>
+<body>
+
+  <!-- Top Header Navigation Bar -->
+  <header class="header-nav">
+    <div class="nav-brand">
+      <img src="assets/images/logo.png" alt="MP-MLA Logo" class="brand-logo-img">
+      <div>
+        <span>MP-MLA Platform</span>
+      </div>
+    </div>
+
+    <!-- Quick Search Button (Ctrl + K) -->
+    <div class="nav-search">
+      <button class="search-btn" id="searchTriggerBtn">
+        <span><i class="fa-solid fa-magnifying-glass"></i> Search documentation...</span>
+        <span class="search-shortcut">Ctrl K</span>
+      </button>
+    </div>
+
+    <div class="nav-controls">
+      <button class="theme-toggle" id="themeToggleBtn" title="Toggle Light/Dark Theme"><i class="fa-solid fa-moon"></i></button>
+      <button class="mobile-toggle" id="mobileToggleBtn" title="Toggle Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </header>
+
+  <!-- Interactive Search Modal Overlay -->
+  <div class="modal-overlay" id="searchModalOverlay">
+    <div class="search-modal">
+      <div class="search-modal-header">
+        <i class="fa-solid fa-magnifying-glass" style="color: var(--text-muted);"></i>
+        <input type="text" id="searchInput" placeholder="Search documentation, modules, backend features..." autocomplete="off">
+        <span class="search-shortcut">ESC</span>
+      </div>
+      <div class="search-results" id="searchResults">
+        <div style="padding: 20px; text-align: center; color: var(--text-muted);">
+          Type any keyword (e.g. <i>Grievance, Voter Portal, Janata Darbar, Funds, Schemes, Website Builder</i>) to search...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Layout Container: Left Sidebar + Main Content + Right TOC -->
+  <div class="layout-container">
+
+    <!-- Left Collapsible Navigation Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      
+      <div class="nav-category">
+        <div class="category-title"><i class="fa-solid fa-compass"></i> Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#intro" class="nav-link active"><span class="nav-icon"><i class="fa-solid fa-book-open"></i></span> Introduction & Overview</a></li>
+          <li class="nav-item"><a href="#architecture" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span> Platform Architecture & Portals</a></li>
+          <li class="nav-item"><a href="#roles-permissions" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-user-shield"></i></span> User Roles & Security Matrix</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-category">
+        <div class="category-title"><i class="fa-solid fa-crown"></i> Master Superadmin</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#superadmin-overview" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-building-user"></i></span> Multi-Tenant Provisioning</a></li>
+          <li class="nav-item"><a href="#subscriptions-paywall" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-credit-card"></i></span> Subscriptions & Paywall Rules</a></li>
+          <li class="nav-item"><a href="#audit-recyclebin" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-shield-halved"></i></span> Audit Logs & Data Recovery</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-category">
+        <div class="category-title"><i class="fa-solid fa-landmark"></i> Constituency Core</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#executive-dashboard" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-chart-pie"></i></span> Executive Dashboard</a></li>
+          <li class="nav-item"><a href="#grievance-management" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-clipboard-list"></i></span> Grievances & Public Requests</a></li>
+          <li class="nav-item"><a href="#janata-darbar" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-users"></i></span> Janata Darbar Sessions</a></li>
+          <li class="nav-item"><a href="#events-protocol" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-calendar-days"></i></span> Events & Protocol Scheduler</a></li>
+          <li class="nav-item"><a href="#meetings-appointments" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-handshake"></i></span> Meetings & Appointments</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-category">
+        <div class="category-title"><i class="fa-solid fa-check-to-slot"></i> Voter Roll & Territory</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#voter-portal" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-address-card"></i></span> Voter Portal & Verification</a></li>
+          <li class="nav-item"><a href="#geography-booths" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-map-location-dot"></i></span> Demographics, Wards & Booths</a></li>
+          <li class="nav-item"><a href="#institutions-facilities" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-hospital-user"></i></span> Public Facilities Directory</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-category">
+        <div class="category-title"><i class="fa-solid fa-helmet-safety"></i> Infrastructure & Welfare</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#projects-infrastructure" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-trowel-bricks"></i></span> Projects & Milestones</a></li>
+          <li class="nav-item"><a href="#funds-management" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-vault"></i></span> Funds & Ledger Audit</a></li>
+          <li class="nav-item"><a href="#welfare-schemes" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-file-invoice-dollar"></i></span> Welfare Schemes & Applications</a></li>
+          <li class="nav-item"><a href="#crm-leaders" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-address-book"></i></span> CRM Contacts & Party Leaders</a></li>
+        </ul>
+      </div>
+
+      <div class="nav-category">
+        <div class="category-title"><i class="fa-solid fa-laptop-code"></i> Digital & PR Studio</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="#website-builder" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-globe"></i></span> Website Builder & Domains</a></li>
+          <li class="nav-item"><a href="#creatives-social" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-palette"></i></span> Creative Studio & Social Media</a></li>
+          <li class="nav-item"><a href="#competitors-intelligence" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-chart-line"></i></span> Competitors Analysis</a></li>
+          <li class="nav-item"><a href="#documents-reports" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-file-pdf"></i></span> Document Vault & PDF Reports</a></li>
+          <li class="nav-item"><a href="#faqs-support" class="nav-link"><span class="nav-icon"><i class="fa-solid fa-circle-question"></i></span> FAQs & Technical Support</a></li>
+        </ul>
+      </div>
+
+    </aside>
+
+    <!-- Main Content Documentation Body -->
+    <main class="main-content">
+
+      <!-- Page Header -->
+      <div class="doc-header">
+        <div class="breadcrumbs">
+          <a href="#">Docs</a>
+          <span>/</span>
+          <a href="#">Operating Guide</a>
+          <span>/</span>
+          <span>Official Manual v2.4.0</span>
+        </div>
+        <h1>MP-MLA Platform Operating Manual</h1>
+        <p style="font-size: 17px; color: var(--text-secondary);">Verified Operating Manual Built Directly from Codebase & Database Schema</p>
+      </div>
+
+      <!-- Chapter 1: Introduction & Overview -->
+      <section id="intro" class="doc-section">
+        <h2><i class="fa-solid fa-rocket"></i> 1. Introduction & Platform Overview</h2>
+        <p>
+          The <strong>MP-MLA Constituency Management SaaS Platform</strong> is a web-based management suite built for Members of Parliament (MP), Members of Legislative Assembly (MLA), secretariat teams, and public administration.
+        </p>
+
+        <div class="callout callout-info">
+          <div class="callout-title"><i class="fa-solid fa-circle-info"></i> Verified System Scope</div>
+          The platform operates on a multi-tenant PostgreSQL Prisma architecture. Superadmins manage SaaS tenants and subscription paywall controls via the Master Dashboard, while MP/MLA offices manage grievances, projects, funds, Janata Darbar sessions, welfare schemes, voter verification, website creation, and public relations.
+        </div>
+
+        <h3>System Feature Modules:</h3>
+        <ol>
+          <li><strong>Executive Dashboard:</strong> Real-time KPI cards, monthly grievance trend charts, priority breakdown, and recent constituent request feeds.</li>
+          <li><strong>Grievance Management System:</strong> Public request intake, SLA countdown timers, department mapping, Kanban board, and proof document resolution.</li>
+          <li><strong>Janata Darbar Sessions & Tokens:</strong> Walk-in digital token engine, VIP priority tagging, session slot reservation, and live hearing minutes.</li>
+          <li><strong>Events & Protocol Scheduler:</strong> Constituency public events, team assignment, protocol guest list RSVP, and speech notes.</li>
+          <li><strong>Meetings & Appointments:</strong> Secretariat meetings scheduler, Minutes of Meeting (MoM) archive, visitor appointment passes.</li>
+          <li><strong>Voter Portal & Verification:</strong> Electoral search by EPIC ID, voter identity verification requests, and demographic analytics (age distribution, gender ratio, ward density).</li>
+          <li><strong>Geography & Booth Hierarchy:</strong> Constituency, District, Block, Town/Village, Polling Location, Booth, and Ward territory mapping.</li>
+          <li><strong>Infrastructure Projects & Milestones:</strong> Work order creation, administrative sanctions, contractor bidding, and 25%/50%/75%/100% stage photo uploads.</li>
+          <li><strong>Fund Ledger & Financial Audit:</strong> MPLAD, MLALAD, State, and Central fund allocations, installment releases, and Utilization Certificates (UC).</li>
+          <li><strong>Welfare Schemes & Applications:</strong> Scheme catalog management, constituent eligibility checks, and Direct Benefit Transfer (DBT) disbursal tracking.</li>
+          <li><strong>CRM Contacts & Party Leaders:</strong> Stakeholder directory, leader profiling, community groups, and automated birthday/anniversary greeting reminders.</li>
+          <li><strong>Public Facilities & Institutions:</strong> Directory for temples, mosques, hospitals, schools, police stations, CSC centers, and parks.</li>
+          <li><strong>Website Builder Studio:</strong> Visual page builder, landing page creator, custom domain routing, SSL management, and live deployment.</li>
+          <li><strong>Creative Studio & Social Media:</strong> Banner generator, festival wish posters, social post analytics, and press releases.</li>
+          <li><strong>Competitor Analysis:</strong> Opposition leader metrics, local issue sentiment tracking, and competitor activity logs.</li>
+          <li><strong>Helplines, Documents & Reports:</strong> Admin emergency helpline numbers, central file vault, and PDF/Excel report export engine.</li>
+          <li><strong>Master Dashboard & Subscriptions:</strong> Tenant onboarding, subscription plans (Free 14-day Trial, Pro, Enterprise), paywall enforcement, audit logs, and soft-delete Recycle Bin.</li>
+        </ol>
+      </section>
+
+      <!-- Architecture Section -->
+      <section id="architecture" class="doc-section">
+        <h2><i class="fa-solid fa-layer-group"></i> 2. Platform Architecture & Portals</h2>
+        <p>The platform provides targeted interfaces for different user roles:</p>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Portal Name</th>
+                <th>Target Audience</th>
+                <th>Core Functionalities</th>
+                <th>Route Path</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Master Control Panel</strong></td>
+                <td>Superadmin / SaaS Owner</td>
+                <td>Multi-Tenant Provisioning, Subscription Plans, Paywall Locks, Global Audits</td>
+                <td><code>/master-dashboard</code></td>
+              </tr>
+              <tr>
+                <td><strong>Constituency Portal</strong></td>
+                <td>MP/MLA, Secretariat Staff</td>
+                <td>Dashboard KPIs, Grievances, Funds, Projects, Events, Competitors</td>
+                <td><code>/dashboard</code></td>
+              </tr>
+              <tr>
+                <td><strong>Voter Portal</strong></td>
+                <td>Voter Verification Staff</td>
+                <td>Electoral Search, EPIC Verification, Identity Requests, Demographics</td>
+                <td><code>/voter-portal</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Real Screenshot 1: Executive Dashboard (Light Theme) -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 2.1: MP/MLA Executive Dashboard Interface (Real Screen)</div>
+          </div>
+          <img src="assets/images/dashboard.png" alt="MP/MLA Executive Dashboard Interface" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: MP/MLA Executive Dashboard displaying live KPI metric cards, Ward breakdown, and Recent Requests. (Click to zoom)</div>
+        </div>
+      </section>
+
+      <!-- Roles & Permissions Matrix -->
+      <section id="roles-permissions" class="doc-section">
+        <h2><i class="fa-solid fa-user-shield"></i> 3. User Roles & Security Matrix</h2>
+        <p>Role-Based Access Control (RBAC) enforces security rules across constituency operations:</p>
+
+        <div class="data-table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>User Role</th>
+                <th>Scope</th>
+                <th>Grievances</th>
+                <th>Voter Portal</th>
+                <th>Funds & Projects</th>
+                <th>System & Billing</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><span class="badge badge-danger">SUPER_ADMIN</span></td>
+                <td>Global SaaS</td>
+                <td>Full Access</td>
+                <td>Full Access</td>
+                <td>Full Access</td>
+                <td><span class="badge badge-success">Full Master Control</span></td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-info">MLA_MP</span></td>
+                <td>Single Constituency</td>
+                <td>Approve & Review</td>
+                <td>View & Analytics</td>
+                <td>Sanction Projects</td>
+                <td>Constituency Settings</td>
+              </tr>
+              <tr>
+                <td><span class="badge badge-success">OFFICE_STAFF</span></td>
+                <td>Single Constituency</td>
+                <td>Create, Assign, Escalate</td>
+                <td>Verify Voters & Records</td>
+                <td>Track Expenses</td>
+                <td>No Billing Access</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Chapter 2: Master Superadmin Control Panel -->
+      <section id="superadmin-overview" class="doc-section">
+        <h2><i class="fa-solid fa-building-user"></i> 4. Master Superadmin & Multi-Tenant Setup</h2>
+        <p>
+          Superadmins manage all SaaS constituency accounts from the Master Dashboard (`/master-dashboard`).
+        </p>
+
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>Access Master Dashboard</h4>
+              <p>Log in as Superadmin at <code>/master-dashboard/login</code>. Open the <strong>Tenants Directory</strong> page.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>Provision New Constituency Account</h4>
+              <p>Click <strong>Add Tenant</strong>. Enter Representative Name (e.g., <i>Hon. Ashok Kumar MP</i>), Constituency Type (<i>Lok Sabha / Vidhan Sabha</i>), State, District, and Subdomain.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">3</div>
+            <div class="step-content">
+              <h4>Assign Subscription Plan & Initial Credentials</h4>
+              <p>Select plan tier (<i>14-Day Free Trial, Pro Plan, Enterprise Plan</i>) and set initial Admin login credentials.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Screenshot: Billing & Subscriptions -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 4.1: SaaS Subscriptions & Account Billing Directory</div>
+          </div>
+          <img src="assets/images/billing.png" alt="SaaS Billing & Subscriptions" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Subscriptions Management, Free Trial Countdown, and Plan Upgrade Interface. (Click to zoom)</div>
+        </div>
+      </section>
+
+      <!-- Subscriptions & Paywall -->
+      <section id="subscriptions-paywall" class="doc-section">
+        <h2><i class="fa-solid fa-credit-card"></i> 5. Subscriptions & Paywall Enforcement Rules</h2>
+        <p>
+          The automated billing system handles free trial countdowns, plan renewals, and paywall locks.
+        </p>
+
+        <div class="callout callout-warning">
+          <div class="callout-title"><i class="fa-solid fa-triangle-exclamation"></i> Subscription Paywall Lock System</div>
+          If a 14-day free trial expires without plan renewal, the platform activates a <strong>Paywall Lock Banner</strong>. 
+          Staff can still view records, but write operations (creating new grievances, voter roll edits, project sanctioning) are locked until plan renewal at <code>/account/billing</code>.
+        </div>
+      </section>
+
+      <!-- Audit Logs & Data Security -->
+      <section id="audit-recyclebin" class="doc-section">
+        <h2><i class="fa-solid fa-shield-halved"></i> 6. System Audit Logs & Data Recovery (Recycle Bin)</h2>
+        <p>
+          All system actions, logins, updates, and deletions are recorded in immutable audit logs.
+        </p>
+
+        <div class="callout callout-tip">
+          <div class="callout-title"><i class="fa-solid fa-lightbulb"></i> Two-Stage Soft Delete & Recovery</div>
+          Deleted items (grievances, contacts, voter entries, projects) are retained in the <strong>Recycle Bin</strong> for 30 days before permanent deletion, allowing instant restoration.
+        </div>
+      </section>
+
+      <!-- Chapter 3: Executive Dashboard & Grievances -->
+      <section id="executive-dashboard" class="doc-section">
+        <h2><i class="fa-solid fa-chart-pie"></i> 7. Executive Dashboard Operating Guide</h2>
+        <p>
+          The Executive Dashboard serves as the central command post for the MP or MLA.
+        </p>
+        <ul>
+          <li><strong>KPI Summary Metrics:</strong> Total Grievances, Sanctioned Funds, Active Projects, Voter Satisfaction Score.</li>
+          <li><strong>Monthly Trends & Priority Breakdown:</strong> Visual charts categorizing complaints by priority (Critical, High, Medium, Low) and status.</li>
+          <li><strong>Quick Action Command Bar:</strong> Instant shortcuts for <i>Log Grievance</i>, <i>Sanction Project</i>, <i>Voter Search</i>, and <i>Janata Darbar</i>.</li>
+        </ul>
+      </section>
+
+      <section id="grievance-management" class="doc-section">
+        <h2><i class="fa-solid fa-clipboard-list"></i> 8. Grievances & Public Requests Operating Guide</h2>
+        <p>
+          Constituent complaints follow an SLA-monitored lifecycle to guarantee timely resolution:
+        </p>
+
+        <!-- Real Screenshot: Grievances List -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 8.1: Grievance Redressal & Public Request Management Interface</div>
+          </div>
+          <img src="assets/images/grievance.png" alt="Grievance Redressal Interface" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Grievances Management Table displaying SLA Countdown Timers, Status Filters, and Action Options. (Click to zoom)</div>
+        </div>
+
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>Complaint Intake & Department Assignment</h4>
+              <p>Navigate to <code>/grievances</code> or <code>/public-requests/new</code>. Enter Constituent Name, Phone, Ward/Booth, Department (PWD, Electricity, Water Board, Health), and Priority.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>Department Escalation & SLA Countdown</h4>
+              <p>The ticket is assigned to the Nodal Department Officer with an automated SLA timer (e.g. 48 hours for emergency repairs).</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">3</div>
+            <div class="step-content">
+              <h4>Action Taken & Resolution Sign-Off</h4>
+              <p>Department officers upload proof photos and action notes. Upon confirmation, ticket status changes to <strong>Resolved</strong>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Janata Darbar & Events -->
+      <section id="janata-darbar" class="doc-section">
+        <h2><i class="fa-solid fa-users"></i> 9. Janata Darbar Sessions Operating Guide</h2>
+        <p>
+          Streamline walk-in hearings at <code>/janata-darbar</code>:
+        </p>
+        <ul>
+          <li><strong>Digital Token Engine:</strong> Issue sequential tokens (e.g. <code>JD-042</code>) for walk-in constituents with time slots.</li>
+          <li><strong>Priority Tagging:</strong> Flag senior citizens, medical urgent cases, or official delegations for priority queue.</li>
+          <li><strong>Live Hearing Minutes:</strong> Record MP/MLA verbal instructions directly against the constituent's profile during the hearing.</li>
+        </ul>
+      </section>
+
+      <section id="events-protocol" class="doc-section">
+        <h2><i class="fa-solid fa-calendar-days"></i> 10. Events & Protocol Scheduler Guide</h2>
+        <p>
+          Manage constituency public functions, rallies, and official protocol events at <code>/events</code>:
+        </p>
+        <ul>
+          <li><strong>Event Scheduling:</strong> Set Date, Time, Venue, Event Category (Public Rally, Inauguration, Inspection), and Budget.</li>
+          <li><strong>Protocol Guest List & RSVP:</strong> Manage VIP guest lists, send official invitations, and track RSVP responses.</li>
+          <li><strong>Speech & Briefing Notes:</strong> Attach official speech notes, talking points, and constituency stats for the MP/MLA.</li>
+        </ul>
+      </section>
+
+      <section id="meetings-appointments" class="doc-section">
+        <h2><i class="fa-solid fa-handshake"></i> 11. Meetings & Appointments Operating Guide</h2>
+        <p>
+          Organize secretariat meetings and constituent appointments at <code>/meetings</code> and <code>/appointments</code>:
+        </p>
+        <ul>
+          <li><strong>Official Meetings & Minutes (MoM):</strong> Schedule departmental review meetings, record attendees, and archive Minutes of Meeting (MoM).</li>
+          <li><strong>VIP & Visitor Appointments:</strong> Schedule visitor slots, issue digital entry passes, and maintain visitor logs.</li>
+        </ul>
+      </section>
+
+      <!-- Voter Portal & Verification -->
+      <section id="voter-portal" class="doc-section">
+        <h2><i class="fa-solid fa-address-card"></i> 12. Voter Portal & Identity Verification Operating Guide</h2>
+        <p>
+          The **Voter Portal** (`/voter-portal`, `/voter-verification`, `/voter-list`) provides complete electoral roll search and verification.
+        </p>
+
+        <!-- Real Screenshot 2: Voter Portal (Light Theme) -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 12.1: Voter Portal & Electoral Search Verification Interface</div>
+          </div>
+          <img src="assets/images/voterportal.png" alt="Voter Portal & Electoral Verification" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Voter Portal displaying EPIC ID Electoral Search, Verification Status badges, and Demographic Analytics. (Click to zoom)</div>
+        </div>
+
+        <h3>Voter Portal Operating Workflow:</h3>
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>Electoral Search by EPIC Card or Name</h4>
+              <p>Go to <code>/voter-portal</code>. Enter EPIC Card Number (e.g. <code>ABC1234567</code>) or constituent name to fetch booth number, serial number, and polling station location.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>Voter Identity Verification</h4>
+              <p>Review new voter registration or address correction requests. Mark status as <strong>Verified</strong>, <strong>Pending Verification</strong>, or <strong>Needs Revision</strong>.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">3</div>
+            <div class="step-content">
+              <h4>Demographic Analytics</h4>
+              <p>Analyze Age Distribution charts (18-25, 26-35, 36-50, 50+), Gender Ratio, and Ward-wise Voter Density heatmaps.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Demographics & Geography -->
+      <section id="geography-booths" class="doc-section">
+        <h2><i class="fa-solid fa-map-location-dot"></i> 13. Demographics, Wards & Booths Hierarchy Guide</h2>
+        <p>
+          Manage constituency territorial structure at <code>/geography</code>:
+        </p>
+        <p><code>Constituency ➔ District ➔ Block ➔ Town/Village ➔ Polling Location ➔ Booth / Ward</code></p>
+        <ul>
+          <li><strong>Booth Management:</strong> Manage all arrangements for a specific polling booth on voting day, including assigned manpower, chairs, tables, and other required resources.</li>
+          <li><strong>Bulk Import:</strong> Upload CSV/Excel files containing electoral roll booth lists via <code>/geography/bulk-import</code>.</li>
+          <li><strong>Polling Location Audit:</strong> Record electricity, water, accessibility ramps, and security facilities available at each booth location.</li>
+        </ul>
+      </section>
+
+      <section id="institutions-facilities" class="doc-section">
+        <h2><i class="fa-solid fa-hospital-user"></i> 14. Public Facilities, Helplines & Information Hub</h2>
+        <p>
+          Manage emergency contact numbers, transport info, and government web directories at <code>/helplines</code> and <code>/public-facilities</code>:
+        </p>
+
+        <!-- Real Screenshot: Public Helplines Directory -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 14.1: Public Emergency Helplines & Citizen Speed-Dial Directory</div>
+          </div>
+          <img src="assets/images/helplines.png" alt="Public Helplines Directory" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Public Helplines Speed-Dial Directory and Admin Contact Management. (Click to zoom)</div>
+        </div>
+
+        <ul>
+          <li><strong>Government Department Directory:</strong> Add contact numbers of important government departments.</li>
+          <li><strong>Public Transport & Transit Information:</strong> Provide local bus routes, timings, and live tracking.</li>
+          <li><strong>Important Government Portal Links:</strong> Provide a list of important government websites with their links.</li>
+          <li><strong>Institution Categories:</strong> Map Temples, Mosques, Hospitals, Schools, Colleges, Police Stations, CSC Centers, Parks, and Community Halls.</li>
+          <li><strong>Facility Directory Requests:</strong> Review registration requests for local public facilities via <code>/register-public-facility</code>.</li>
+        </ul>
+      </section>
+
+      <!-- Infrastructure Projects & Funds -->
+      <section id="projects-infrastructure" class="doc-section">
+        <h2><i class="fa-solid fa-trowel-bricks"></i> 15. Infrastructure Projects Operating Guide</h2>
+        <p>
+          Monitor constituency development works at <code>/projects</code>:
+        </p>
+
+        <!-- Real Screenshot: Infrastructure Projects -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 15.1: Infrastructure Projects & Development Works Monitoring</div>
+          </div>
+          <img src="assets/images/projects.png" alt="Infrastructure Projects Monitoring" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Development Works Projects Directory displaying Stage-wise Milestones and Budgets. (Click to zoom)</div>
+        </div>
+
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>Create Project Entry</h4>
+              <p>Enter Project Title, Category (Road, Community Hall, School, Solar Light), Estimated Budget, Ward, and Contractor Name.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>Stage-wise Construction Milestone Verification</h4>
+              <p>Upload site progress photos at 25%, 50%, 75%, and 100% completion milestones before approving payment releases.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="funds-management" class="doc-section">
+        <h2><i class="fa-solid fa-vault"></i> 16. Funds & Financial Ledger Audit Guide</h2>
+        <p>
+          Track annual fund allocations and expenditure audit ledgers at <code>/funds</code> and <code>/funds/overview</code>:
+        </p>
+
+        <!-- Real Screenshot: Funds Overview -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 16.1: MPLAD & Local Area Funds Overview Interface</div>
+          </div>
+          <img src="assets/images/funds.png" alt="Funds Overview Interface" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Financial Allocations, Released Installments, and Head-wise Expenditure Breakdown. (Click to zoom)</div>
+        </div>
+
+        <ul>
+          <li><strong>Fund Categories:</strong> Manage MPLAD, MLALAD, State Fund, Central Fund, and CSR allocations.</li>
+          <li><strong>Installment Releases & UC Vault:</strong> Track installment releases from District Collectorate and archive Utilization Certificates (UC).</li>
+          <li><strong>Head-wise Balance Ledger:</strong> View real-time balance remaining across education, healthcare, roads, and drinking water heads.</li>
+        </ul>
+      </section>
+
+      <!-- Welfare Schemes -->
+      <section id="welfare-schemes" class="doc-section">
+        <h2><i class="fa-solid fa-file-invoice-dollar"></i> 17. Welfare Schemes & Applications Guide</h2>
+        <p>
+          Manage state and central welfare schemes at <code>/schemes</code> and <code>/schemes/applications</code>:
+        </p>
+
+        <!-- Real Screenshot: Welfare Schemes -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 17.1: Government Welfare Scheme Directory & Eligibility Interface</div>
+          </div>
+          <img src="assets/images/schemes.png" alt="Welfare Schemes Interface" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Government Welfare Schemes Catalog, Eligibility Filter, and Application Processing. (Click to zoom)</div>
+        </div>
+
+        <ul>
+          <li><strong>Scheme Repository:</strong> Define scheme guidelines, eligibility criteria (Age, Income, Gender, Social Category), and required documents.</li>
+          <li><strong>Automated Eligibility Engine:</strong> Match constituent profiles with active schemes automatically.</li>
+          <li><strong>Application Disbursal Tracking:</strong> Process applications, review uploaded documents, and track Direct Benefit Transfer (DBT) status.</li>
+        </ul>
+      </section>
+
+      <!-- CRM & Party Leaders -->
+      <section id="crm-leaders" class="doc-section">
+        <h2><i class="fa-solid fa-address-book"></i> 18. CRM Contacts, Community Groups & Party Leaders Guide</h2>
+        <p>
+          Manage constituency stakeholders and community organizations at <code>/crm/contacts</code>, <code>/community</code>, and <code>/leaders</code>:
+        </p>
+
+        <!-- Real Screenshot: Community Groups -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 18.1: Community Groups & Religious/Professional Networks</div>
+          </div>
+          <img src="assets/images/community.png" alt="Community Groups Interface" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Community Groups Directory showing Religious & Professional Network management. (Click to zoom)</div>
+        </div>
+
+        <ul>
+          <li><strong>Religious Communities:</strong> Create groups for members of Churches, Temples, Gurudwaras, Mosques, etc.</li>
+          <li><strong>Professional Communities:</strong> Create groups for professionals such as engineers, doctors, teachers, etc.</li>
+          <li><strong>Constituent CRM Contacts:</strong> Maintain detailed profile history, address, voting ward, and past request logs.</li>
+          <li><strong>Party Leaders Directory:</strong> Categorize party workers, booth presidents, youth wing leaders, and local influencers.</li>
+          <li><strong>Birthday & Anniversary Reminders:</strong> View upcoming birthdays at <code>/leaders/birthdays</code> and dispatch automated greeting messages.</li>
+        </ul>
+      </section>
+
+      <!-- Website Builder -->
+      <section id="website-builder" class="doc-section">
+        <h2><i class="fa-solid fa-globe"></i> 19. Website Builder Studio & Domains Guide</h2>
+        <p>
+          Create and host official constituency web portals at <code>/website/builder</code>:
+        </p>
+
+        <!-- Real Screenshot: Website Builder -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 19.1: Website Builder & Custom Subdomain Studio</div>
+          </div>
+          <img src="assets/images/websites.png" alt="Website Builder Studio" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Website Builder Studio Dashboard displaying Custom Domains and Page Builder. (Click to zoom)</div>
+        </div>
+
+        <div class="steps-container">
+          <div class="step-item">
+            <div class="step-badge">1</div>
+            <div class="step-content">
+              <h4>Build Web Pages</h4>
+              <p>Use the drag-and-drop page builder to assemble homepages, news portals, photo galleries, and request forms.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">2</div>
+            <div class="step-content">
+              <h4>Map Custom Subdomains</h4>
+              <p>Configure web domains (e.g. <code>mp-ashokkumar.in</code>) with SSL security certificates at <code>/website/domains</code>.</p>
+            </div>
+          </div>
+          <div class="step-item">
+            <div class="step-badge">3</div>
+            <div class="step-content">
+              <h4>Live Deployment</h4>
+              <p>Publish website updates instantly with live deployment status logs at <code>/website/deployments</code>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Creative Studio & Social -->
+      <section id="creatives-social" class="doc-section">
+        <h2><i class="fa-solid fa-palette"></i> 20. Creative Studio & Social Media Guide</h2>
+        <p>
+          Manage public relations graphics and social outreach at <code>/creatives</code> and <code>/social</code>:
+        </p>
+
+        <!-- Real Screenshot: Creative Studio -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 20.1: Creative Studio Poster & Banner Generator</div>
+          </div>
+          <img src="assets/images/creatives.png" alt="Creative Studio" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Creative Studio Banner Generator for Festival Banners and Social Media Graphics. (Click to zoom)</div>
+        </div>
+
+        <ul>
+          <li><strong>Creative Studio Poster Generator:</strong> Overlay MP/MLA photographs, party emblems, and festival wish text onto high-res graphic templates.</li>
+          <li><strong>Social Media Analytics:</strong> Track post engagement, constituent reach, and follower metrics.</li>
+          <li><strong>Press Release Storage:</strong> Archive official media statements, event photos, and press briefings.</li>
+        </ul>
+      </section>
+
+      <!-- Competitor Analysis -->
+      <section id="competitors-intelligence" class="doc-section">
+        <h2><i class="fa-solid fa-chart-line"></i> 21. Competitors Analysis Operating Guide</h2>
+        <p>
+          Track opposition political activities and sentiment at <code>/competitors</code>:
+        </p>
+
+        <!-- Real Screenshot: Competitor Analysis -->
+        <div class="screenshot-card">
+          <div class="screenshot-header">
+            <div class="window-dots">
+              <span class="dot dot-red"></span>
+              <span class="dot dot-yellow"></span>
+              <span class="dot dot-green"></span>
+            </div>
+            <div class="screenshot-title">Figure 21.1: Competitor Analysis & Political Metrics Dashboard</div>
+          </div>
+          <img src="assets/images/competitors.png" alt="Competitor Analysis Dashboard" class="screenshot-img">
+          <div class="screenshot-caption">Real Captured Screenshot: Opposition Leader Metrics and Local Political Sentiment Monitor. (Click to zoom)</div>
+        </div>
+
+        <ul>
+          <li><strong>Opposition Profiling:</strong> Maintain records of rival candidates, their strongholds, and political statements.</li>
+          <li><strong>Sentiment & Activity Monitor:</strong> Track local political trends, campaign promises, and public sentiment.</li>
+        </ul>
+      </section>
+
+      <!-- Documents & Reports -->
+      <section id="documents-reports" class="doc-section">
+        <h2><i class="fa-solid fa-file-pdf"></i> 22. Document Vault & PDF Reports Guide</h2>
+        <p>
+          Manage central documents and analytics reports at <code>/documents</code> and <code>/reports/pdf</code>:
+        </p>
+        <ul>
+          <li><strong>Central Document Vault:</strong> Securely upload official sanction letters, government circulars, and parliamentary questions.</li>
+          <li><strong>Executive PDF Summary Reports:</strong> Generate formal monthly activity reports for the MP/MLA office.</li>
+          <li><strong>Excel Data Export Engine:</strong> Export filtered grievance, voter, project, and scheme datasets to Excel format.</li>
+        </ul>
+      </section>
+
+      <!-- FAQs & Support -->
+      <section id="faqs-support" class="doc-section">
+        <h2><i class="fa-solid fa-circle-question"></i> 23. Frequently Asked Questions & Support</h2>
+
+        <div class="doc-section">
+          <h3>Q1: How do I search for a voter in the Voter Portal?</h3>
+          <p>Navigate to <code>/voter-portal</code> from the sidebar. Enter the EPIC Card number or constituent name in the search bar.</p>
+
+          <h3>Q2: Can I export project sanction details to PDF?</h3>
+          <p>Yes. Go to <code>/reports/pdf</code> or open <code>/projects</code> and click <strong>Export PDF Report</strong> to download formal summaries.</p>
+
+          <h3>Q3: What happens if a free trial expires?</h3>
+          <p>The system activates a subscription paywall banner. Read access remains active, while write access is locked until plan renewal at <code>/account/billing</code>.</p>
+        </div>
+
+        <!-- Article Footer Navigation -->
+        <div class="doc-footer-nav">
+          <a href="#intro" class="nav-card">
+            <div class="nav-card-sub">◄ Previous</div>
+            <div class="nav-card-title">Introduction & System Architecture</div>
+          </a>
+          <a href="#faqs-support" class="nav-card" style="text-align: right;">
+            <div class="nav-card-sub">Next ►</div>
+            <div class="nav-card-title">Technical Support & FAQs</div>
+          </a>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Right Table of Contents (TOC) Sidebar -->
+    <aside class="toc-sidebar">
+      <div class="toc-title">On This Page</div>
+      <ul class="toc-list" id="tocList">
+        <!-- Dynamically generated by app.js -->
+      </ul>
+    </aside>
+
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
