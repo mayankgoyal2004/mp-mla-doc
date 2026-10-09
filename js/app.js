@@ -141,11 +141,24 @@ function initSearch() {
 function initSidebar() {
   const mobileToggleBtn = document.getElementById('mobileToggleBtn');
   const sidebar = document.getElementById('sidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-  if (mobileToggleBtn && sidebar) {
-    mobileToggleBtn.addEventListener('click', () => {
-      sidebar.classList.toggle('active');
-    });
+  const toggleSidebar = () => {
+    if (sidebar) sidebar.classList.toggle('active');
+    if (sidebarOverlay) sidebarOverlay.classList.toggle('active');
+  };
+
+  const closeSidebar = () => {
+    if (sidebar) sidebar.classList.remove('active');
+    if (sidebarOverlay) sidebarOverlay.classList.remove('active');
+  };
+
+  if (mobileToggleBtn) {
+    mobileToggleBtn.addEventListener('click', toggleSidebar);
+  }
+
+  if (sidebarOverlay) {
+    sidebarOverlay.addEventListener('click', closeSidebar);
   }
 
   // Smooth click & highlight sidebar links
@@ -154,8 +167,8 @@ function initSidebar() {
     link.addEventListener('click', () => {
       navLinks.forEach(l => l.classList.remove('active'));
       link.classList.add('active');
-      if (window.innerWidth <= 768 && sidebar) {
-        sidebar.classList.remove('active');
+      if (window.innerWidth <= 992) {
+        closeSidebar();
       }
     });
   });
